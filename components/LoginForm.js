@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { Text, View, TextInput, Button } from "react-native";
-import styles from "../utils/AppStyles";
+import { Text, View, TextInput, Button, Image } from "react-native";
+import styles, {colors} from "../utils/AppStyles";
 
-function LoginForm() {
+function LoginForm({loginState, setLoginState}) {
   let [userName, setUserName] = useState("");
   let [userPass, setUserPass] = useState("");
 
@@ -16,11 +16,13 @@ function LoginForm() {
   };
 
   const handleLogin = () => {
-    alert(`Hello ${userName}`);
+    setLoginState(true)
   };
 
   return (
     <View style={styles.container}>
+      
+    <Image source={require("../assets/School_App_Logo_Round.png")} style={{width:128, height:128, alignSelf:'center'}}/>
       <Text style={styles.headingText}>Welcome to your school!</Text>
       <View style={styles.loginContainer}>
         <TextInput
@@ -35,7 +37,7 @@ function LoginForm() {
           placeholder="Password"
         />
         <View style={styles.buttonWrap}>
-          <Button title="Login" onPress={handleLogin} />
+          <Button title="Login" onPress={handleLogin}  android_ripple={{color:"#fff"}} color={colors.primary}/>
         </View>
       </View>
       <StatusBar style="auto" />
