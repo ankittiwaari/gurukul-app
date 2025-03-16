@@ -7,11 +7,14 @@ exports.colors = {
   extra2: "#606c38",
 };
 export default StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor:'#fefae0'
+  mainBackground: {
+    backgroundColor: '#fefae0'
+  },
+  container: { 
+    flex: 1, 
+    backgroundColor: '#fefae0', 
+    paddingTop: 50,
+    justifyContent:'flex-start',
   },
   loginContainer: {
     width: "100%",
@@ -34,7 +37,7 @@ export default StyleSheet.create({
     fontSize: 30,
     fontWeight: "bold",
     marginBottom: 30,
-    color:'#283618'
+    color: '#283618'
   },
   buttonWrap: {
     overflow: "hidden",

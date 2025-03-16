@@ -20,8 +20,7 @@ function LoginForm({loginState, setLoginState}) {
   };
 
   return (
-    <View style={styles.container}>
-      
+    <View style={{alignItems:'center'}}>      
     <Image source={require("../assets/School_App_Logo_Round.png")} style={{width:128, height:128, alignSelf:'center'}}/>
       <Text style={styles.headingText}>Welcome to your school!</Text>
       <View style={styles.loginContainer}>
