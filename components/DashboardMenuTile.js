@@ -20,11 +20,7 @@ function DashboardMenuTile({ title, icon }) {
 const styles = StyleSheet.create({
     gridItem: {
         flex: 1,
-        margin: 8,
-        height: 100,
-        borderRadius: 8,
-        elevation: 4,
-        width: 120
+        margin: 0
     },
     innerContainer: {
         flex: 1,

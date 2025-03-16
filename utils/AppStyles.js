@@ -10,11 +10,17 @@ export default StyleSheet.create({
   mainBackground: {
     backgroundColor: '#fefae0'
   },
-  container: { 
+  innerApp:{
     flex: 1, 
     backgroundColor: '#fefae0', 
     paddingTop: 50,
     justifyContent:'flex-start',
+  },
+  container: { 
+    flex: 1, 
+    backgroundColor: '#fefae0', 
+    paddingTop: 50,
+    justifyContent:'center',
   },
   loginContainer: {
     width: "100%",
