@@ -2,10 +2,10 @@ import { Pressable, Text, View, StyleSheet } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import { colors } from '../utils/AppStyles';
 
-function DashboardMenuTile({ title, icon }) {
+function DashboardMenuTile({ title, icon, onPress }) {
     return (
         <View style={styles.gridItem}>
-            <Pressable style={styles.button} android_ripple={{ color: colors.secondary }}>
+            <Pressable style={styles.button} android_ripple={{ color: colors.secondary }} onPress={onPress}>
                 <View style={styles.innerContainer}>
                     <FontAwesome name={icon} style={styles.iconStyles} />
                     <Text style={[styles.button, styles.title]}>
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
         color: colors.primary        
     },
     iconStyles: {
-        fontSize: 36,
+        fontSize: 48,
         color: colors.primary
     }
 });

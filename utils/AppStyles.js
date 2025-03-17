@@ -12,14 +12,12 @@ export default StyleSheet.create({
   },
   innerApp:{
     flex: 1, 
-    backgroundColor: '#fefae0', 
-    paddingTop: 50,
+    backgroundColor: '#fefae0',     
     justifyContent:'flex-start',
   },
   container: { 
     flex: 1, 
     backgroundColor: '#fefae0', 
-    paddingTop: 50,
     justifyContent:'center',
   },
   loginContainer: {
