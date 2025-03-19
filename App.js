@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { SafeAreaView, View } from "react-native";
+import { View } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -17,7 +17,8 @@ import Homework from "./screens/Homework";
 import PayOnline from "./screens/PayOnline";
 import ApplyLeave from "./screens/ApplyLeave";
 import Notifications from "./screens/Notifications";
-import styles from './utils/AppStyles';
+import styles, {colors} from './utils/AppStyles';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -29,14 +30,21 @@ export default function App() {
     <LoginForm loginState={loginState} setLoginState={setLoginState} />
   );
   if (loginState) {
-    wrapperStyle = styles.innerApp    
+    wrapperStyle = styles.innerApp
   }
   return (
     <>
-      <StatusBar style="auto" />
+      <StatusBar style="light" />
       <View style={wrapperStyle}>
         <NavigationContainer>
-          <Stack.Navigator>
+          <Stack.Navigator screenOptions={
+            {
+              headerStyle: {
+                backgroundColor: colors.extra1                
+              },
+              headerTintColor:'#fff'
+            }
+          }>
             <Stack.Screen name="Dashboard" component={Dashboard} />
             <Stack.Screen name="MyProfile" component={MyProfile} />
             <Stack.Screen name="Remarks" component={Remarks} />
