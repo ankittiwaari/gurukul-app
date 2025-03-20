@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { View } from "react-native";
+import { View, Text, Image } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList } from "@react-navigation/drawer";
 import LoginForm from "./components/LoginForm";
 import Dashboard from "./screens/Dashboard";
 import MyProfile from "./screens/MyProfile";
@@ -17,10 +18,39 @@ import Homework from "./screens/Homework";
 import PayOnline from "./screens/PayOnline";
 import ApplyLeave from "./screens/ApplyLeave";
 import Notifications from "./screens/Notifications";
-import styles, {colors} from './utils/AppStyles';
+import styles, { colors } from './utils/AppStyles';
 
 
 const Stack = createNativeStackNavigator();
+const Drawer = createDrawerNavigator();
+
+function DrawerNavigator() {
+  return (
+    <Drawer.Navigator
+      drawerContent={function (props) {
+        return (
+          
+            <DrawerContentScrollView {...props} style={{ backgroundColor: colors.extra1 }}>
+              <View style={{alignItems:'center', marginBottom:30, overflow:'hidden'}}><Image style={{height:200, width:200, borderRadius:100}} source={require('./assets/student.jpg')}/></View>
+              <DrawerItemList {...props} />
+            </DrawerContentScrollView>
+          
+        )
+      }}
+      screenOptions={{
+        headerStyle: { backgroundColor: colors.extra1 },
+        headerTintColor: '#fff',
+        drawerContentStyle: { backgroundColor: colors.extra1 },
+        drawerInactiveTintColor: colors.tertiary,
+        drawerActiveTintColor: colors.extra1,
+        drawerActiveBackgroundColor: colors.tertiary,
+      }}
+    >
+      <Drawer.Screen name="Dashboard" component={Dashboard} />
+      <Drawer.Screen name="Notifications" component={Notifications} />
+    </Drawer.Navigator>
+  );
+}
 
 export default function App() {
   let [loginState, setLoginState] = useState(false);
@@ -40,12 +70,13 @@ export default function App() {
           <Stack.Navigator screenOptions={
             {
               headerStyle: {
-                backgroundColor: colors.extra1                
+                backgroundColor: colors.extra1
               },
-              headerTintColor:'#fff'
+              headerTintColor: '#fff',
+
             }
           }>
-            <Stack.Screen name="Dashboard" component={Dashboard} />
+            <Stack.Screen name="NavigationDrawer" component={DrawerNavigator} options={{ headerShown: false }} />
             <Stack.Screen name="MyProfile" component={MyProfile} />
             <Stack.Screen name="Remarks" component={Remarks} />
             <Stack.Screen name="Result" component={Result} />
