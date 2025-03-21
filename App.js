@@ -19,7 +19,8 @@ import PayOnline from "./screens/PayOnline";
 import ApplyLeave from "./screens/ApplyLeave";
 import Notifications from "./screens/Notifications";
 import styles, { colors } from './utils/AppStyles';
-
+import { Provider } from 'react-redux';
+import { store } from './store/redux/store';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -29,12 +30,11 @@ function DrawerNavigator() {
     <Drawer.Navigator
       drawerContent={function (props) {
         return (
-          
-            <DrawerContentScrollView {...props} style={{ backgroundColor: colors.extra1 }}>
-              <View style={{alignItems:'center', marginBottom:30, overflow:'hidden'}}><Image style={{height:200, width:200, borderRadius:100}} source={require('./assets/student.jpg')}/></View>
-              <DrawerItemList {...props} />
-            </DrawerContentScrollView>
-          
+          <DrawerContentScrollView {...props} style={{ backgroundColor: colors.extra1 }}>
+            <View style={{ alignItems: 'center', marginBottom: 30, overflow: 'hidden' }}><Image style={{ height: 200, width: 200, borderRadius: 100 }} source={require('./assets/student.jpg')} /></View>
+            <DrawerItemList {...props} />
+          </DrawerContentScrollView>
+
         )
       }}
       screenOptions={{
@@ -53,45 +53,43 @@ function DrawerNavigator() {
 }
 
 export default function App() {
-  let [loginState, setLoginState] = useState(false);
+  let [loginState, setLoginState] = useState(false);  
   let wrapperStyle = styles.container
   let screen = (
-
     <LoginForm loginState={loginState} setLoginState={setLoginState} />
   );
   if (loginState) {
     wrapperStyle = styles.innerApp
-  }
-  return (
-    <>
+    screen = <>
       <StatusBar style="light" />
-      <View style={wrapperStyle}>
-        <NavigationContainer>
-          <Stack.Navigator screenOptions={
-            {
-              headerStyle: {
-                backgroundColor: colors.extra1
-              },
-              headerTintColor: '#fff',
+        <View style={wrapperStyle}>
+          <NavigationContainer>
+            <Stack.Navigator screenOptions={
+              {
+                headerStyle: {
+                  backgroundColor: colors.extra1
+                },
+                headerTintColor: '#fff',
 
-            }
-          }>
-            <Stack.Screen name="NavigationDrawer" component={DrawerNavigator} options={{ headerShown: false }} />
-            <Stack.Screen name="MyProfile" component={MyProfile} />
-            <Stack.Screen name="Remarks" component={Remarks} />
-            <Stack.Screen name="Result" component={Result} />
-            <Stack.Screen name="Downloads" component={Downloads} />
-            <Stack.Screen name="Attendance" component={Attendance} />
-            <Stack.Screen name="Fee" component={Fee} />
-            <Stack.Screen name="Communication" component={Communication} />
-            <Stack.Screen name="ClassBroadcast" component={ClassBroadcast} />
-            <Stack.Screen name="Homework" component={Homework} />
-            <Stack.Screen name="PayOnline" component={PayOnline} />
-            <Stack.Screen name="ApplyLeave" component={ApplyLeave} />
-            <Stack.Screen name="Notifications" component={Notifications} />
-          </Stack.Navigator>
-        </NavigationContainer>
-      </View>
+              }
+            }>
+              <Stack.Screen name="NavigationDrawer" component={DrawerNavigator} options={{ headerShown: false }} />
+              <Stack.Screen name="MyProfile" component={MyProfile} />
+              <Stack.Screen name="Remarks" component={Remarks} />
+              <Stack.Screen name="Result" component={Result} />
+              <Stack.Screen name="Downloads" component={Downloads} />
+              <Stack.Screen name="Attendance" component={Attendance} />
+              <Stack.Screen name="Fee" component={Fee} />
+              <Stack.Screen name="Communication" component={Communication} />
+              <Stack.Screen name="ClassBroadcast" component={ClassBroadcast} />
+              <Stack.Screen name="Homework" component={Homework} />
+              <Stack.Screen name="PayOnline" component={PayOnline} />
+              <Stack.Screen name="ApplyLeave" component={ApplyLeave} />
+              <Stack.Screen name="Notifications" component={Notifications} />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </View>
     </>
-  );
+  }
+  return (<Provider store={store}>{screen}</Provider>);
 }
