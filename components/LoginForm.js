@@ -17,6 +17,7 @@ function LoginForm({ loginState, setLoginState }) {
   };
 
   const handleLogin = () => {
+    setLoginState(true)
     dispatch(authenticate({ loggedIn: true }));
   };
   const dispatch = useDispatch();
@@ -24,7 +25,7 @@ function LoginForm({ loginState, setLoginState }) {
     return state.authenticate.loggedIn;    
   })
   return (
-    <View style={{ alignItems: 'center' }}>
+    <View style={{ alignItems: 'center'}}>
       <Image source={require("../assets/School_App_Logo_Round.png")} style={{ width: 128, height: 128, alignSelf: 'center' }} />
       <Text style={styles.headingText}>Welcome to your school!</Text>
       <View style={styles.loginContainer}>

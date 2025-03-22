@@ -56,7 +56,7 @@ export default function App() {
   let [loginState, setLoginState] = useState(false);  
   let wrapperStyle = styles.container
   let screen = (
-    <LoginForm loginState={loginState} setLoginState={setLoginState} />
+    <View style={wrapperStyle}><LoginForm loginState={loginState} setLoginState={setLoginState} /></View>
   );
   if (loginState) {
     wrapperStyle = styles.innerApp
