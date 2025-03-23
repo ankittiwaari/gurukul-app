@@ -1,15 +1,18 @@
 import { StyleSheet, View, Image, Text } from "react-native";
+import {useContext} from "react";
 import { colors } from '../utils/AppStyles';
+import {ProfileContext} from "../store/profile-context";
 function ProfileHeader() {
+    const profileContext = useContext(ProfileContext);
     return (
         <View style={styles.headerContainer}>
             <View>
                 <Image source={require("../assets/student.jpg")} style={{ width: 100, height: 100, borderRadius:50}} />
             </View>
             <View style={styles.studentDetailsWrapper}>
-                <Text style={styles.studentName}>Student Name</Text>
-                <Text style={styles.studentDetails}>Class - Section</Text>
-                <Text style={styles.studentDetails}>Academic year: xxxx-xx</Text>
+                <Text style={styles.studentName}>{profileContext.profileData?.firstName} {profileContext.profileData?.lastName}</Text>
+                <Text style={styles.studentDetails}>{profileContext.profileData?.class} - {profileContext.profileData?.section}</Text>
+                <Text style={styles.studentDetails}>Academic year: {profileContext.profileData?.academic_year}</Text>
             </View>
             <View></View>
         </View>
