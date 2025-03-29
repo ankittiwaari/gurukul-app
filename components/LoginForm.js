@@ -57,7 +57,7 @@ function LoginForm() {
             })
             authCtx.authenticate(authResponse.data.idToken)
         } catch (e) {
-            Alert.alert("Failed to login! Please check your credentials and try again!");
+            Alert.alert(`Failed to login! ${e} ${e.message}`);
         }
         setIsLoading(false);
     };

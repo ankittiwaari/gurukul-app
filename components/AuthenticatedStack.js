@@ -1,5 +1,5 @@
 import {StatusBar} from "expo-status-bar";
-import {Image, View, Text, Alert, ActivityIndicator} from "react-native";
+import {Image, View, Text, Alert, ActivityIndicator, Pressable} from "react-native";
 import styles, {colors} from "../utils/AppStyles";
 import {NavigationContainer, useTheme} from "@react-navigation/native";
 import MyProfile from "../screens/MyProfile";
@@ -17,9 +17,9 @@ import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import {createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem} from "@react-navigation/drawer";
 import Dashboard from "../screens/Dashboard";
 import Notifications from "../screens/Notifications";
-import {FontAwesome} from "@expo/vector-icons";
+import {FontAwesome, MaterialIcons} from "@expo/vector-icons";
 import {AuthContext} from "../store/auth-context";
-import ProfileContextProvider, {ProfileContext} from "../store/profile-context";
+import {ProfileContext} from "../store/profile-context";
 import {useContext, useEffect, useState} from "react";
 import axios from "axios";
 
@@ -82,26 +82,26 @@ function InnerSection() {
                         backgroundColor: colors.extra1
                     },
                     headerTintColor: '#fff',
-
                 }
-            }>
-                <Stack.Screen name="NavigationDrawer" component={DrawerNavigator}
-                              options={{headerShown: false}}/>
-                <Stack.Screen name="MyProfile" component={MyProfile}/>
-                <Stack.Screen name="Remarks" component={Remarks}/>
-                <Stack.Screen name="Result" component={Result}/>
-                <Stack.Screen name="Downloads" component={Downloads}/>
-                <Stack.Screen name="Attendance" component={Attendance}/>
-                <Stack.Screen name="Fee" component={Fee}/>
-                <Stack.Screen name="Communication" component={Communication}/>
-                <Stack.Screen name="ClassBroadcast" component={ClassBroadcast}/>
-                <Stack.Screen name="Homework" component={Homework}/>
-                <Stack.Screen name="PayOnline" component={PayOnline}/>
-                <Stack.Screen name="ApplyLeave" component={ApplyLeave}/>
-                <Stack.Screen name="Notifications" component={Notifications}/>
-            </Stack.Navigator>
-        </NavigationContainer>
-    </View>
+            } >
+            <Stack.Screen name="NavigationDrawer" component={DrawerNavigator}
+                          options={{headerShown: false}}/>
+            <Stack.Screen name="MyProfile" component={MyProfile}/>
+            <Stack.Screen name="Remarks" component={Remarks}/>
+            <Stack.Screen name="Result" component={Result}/>
+            <Stack.Screen name="Downloads" component={Downloads}/>
+            <Stack.Screen name="Attendance" component={Attendance} options={{
+                headerRight: () => <Text>HI</Text>}}/>
+            <Stack.Screen name="Fee" component={Fee}/>
+            <Stack.Screen name="Communication" component={Communication}/>
+            <Stack.Screen name="ClassBroadcast" component={ClassBroadcast}/>
+            <Stack.Screen name="Homework" component={Homework}/>
+            <Stack.Screen name="PayOnline" component={PayOnline}/>
+            <Stack.Screen name="ApplyLeave" component={ApplyLeave}/>
+            <Stack.Screen name="Notifications" component={Notifications}/>
+        </Stack.Navigator>
+    </NavigationContainer>
+</View>
 }
 
 export default function AuthenticatedStack() {
