@@ -1,10 +1,19 @@
-import {StyleSheet, Text, View} from "react-native";
-import {FontAwesome} from "@expo/vector-icons";
+import {StyleSheet, Text, View, Linking, Pressable, Alert} from "react-native";
+import {useCallback} from "react";
 import {colors} from '../utils/AppStyles';
 
 export default function NotificationCard({item}) {
+    const handleNavigation = useCallback(async (item) => {
+        const supported = await Linking.canOpenURL(item.url);
+        if (supported) {
+            await Linking.openURL(item.url);
+        } else {
+            Alert.alert(`Don't know how to open this URL: ${item.url}`);
+        }
+    }, [])
+
     return (
-        <>
+        <Pressable onPress={handleNavigation.bind(this, item)}>
             <View style={textStyles.contentWrap}>
                 <View style={textStyles.notificationWrap}>
                     <View style={{
@@ -12,14 +21,11 @@ export default function NotificationCard({item}) {
                         justifyContent: 'space-between',
                         alignItems: 'center'
                     }}>
-                        <View><Text style={textStyles.lebel}>{item.session} - {item.quarter}</Text></View>
-                    </View>
-                    <View>
-                        <Text style={textStyles.contentStyles}>{item.result}</Text>
+                        <View><Text style={textStyles.lebel}>{item.title}</Text></View>
                     </View>
                 </View>
             </View>
-        </>
+        </Pressable>
     )
 }
 
@@ -32,7 +38,7 @@ const textStyles = StyleSheet.create({
     contentStyles: {
         color: colors.extra1,
         fontSize: 18,
-        textTransform:'capitalize'
+        textTransform: 'capitalize'
     },
     contentWrap: {
         padding: 8,

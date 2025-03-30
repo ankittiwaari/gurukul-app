@@ -22,6 +22,7 @@ import {AuthContext} from "../store/auth-context";
 import {ProfileContext} from "../store/profile-context";
 import {useContext, useEffect, useState} from "react";
 import axios from "axios";
+import CommonDetails from "../screens/CommonDetails";
 
 
 const Stack = createNativeStackNavigator();
@@ -90,8 +91,7 @@ function InnerSection() {
             <Stack.Screen name="Remarks" component={Remarks}/>
             <Stack.Screen name="Result" component={Result}/>
             <Stack.Screen name="Downloads" component={Downloads}/>
-            <Stack.Screen name="Attendance" component={Attendance} options={{
-                headerRight: () => <Text>HI</Text>}}/>
+            <Stack.Screen name="Attendance" component={Attendance}/>
             <Stack.Screen name="Fee" component={Fee}/>
             <Stack.Screen name="Communication" component={Communication}/>
             <Stack.Screen name="ClassBroadcast" component={ClassBroadcast}/>
@@ -99,6 +99,7 @@ function InnerSection() {
             <Stack.Screen name="PayOnline" component={PayOnline}/>
             <Stack.Screen name="ApplyLeave" component={ApplyLeave}/>
             <Stack.Screen name="Notifications" component={Notifications}/>
+            <Stack.Screen name="CommonDetails" component={CommonDetails}/>
         </Stack.Navigator>
     </NavigationContainer>
 </View>

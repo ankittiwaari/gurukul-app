@@ -1,10 +1,9 @@
-import {StyleSheet, Text, View} from "react-native";
-import {FontAwesome} from "@expo/vector-icons";
+import {StyleSheet, Text, View, Pressable} from "react-native";
 import {colors} from '../utils/AppStyles';
 
-export default function NotificationCard({item}) {
+export default function NotificationCard({item, onPress = () =>{}}) {
     return (
-        <>
+        <Pressable android_ripple={{color: colors.extra1}} onPress={() => onPress('CommonDetails', {...item})}>
             <View style={textStyles.contentWrap}>
                 <View style={textStyles.notificationWrap}>
                     <View style={{
@@ -20,7 +19,7 @@ export default function NotificationCard({item}) {
                     </View>
                 </View>
             </View>
-        </>
+        </Pressable>
     )
 }
 

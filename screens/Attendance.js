@@ -1,12 +1,10 @@
-import React, {useEffect, useState, useLayoutEffect} from 'react';
-import {View, Text, StyleSheet, Dimensions, ActivityIndicator, Pressable} from "react-native";
-import Styles from "../utils/AppStyles";
-import {Calendar, LocaleConfig} from 'react-native-calendars';
+import React, {useEffect, useState} from 'react';
+import {View, Text, StyleSheet} from "react-native";
+import Refreshable from "../components/Refreshable";
+import {Calendar} from 'react-native-calendars';
 import Api from '../utils/Api';
-import {MaterialIcons} from "@expo/vector-icons";
-import ReloadButton from "../components/ReloadButton";
 
-const App = ({navigation}) => {
+const App = () => {
 
     const [isLoading, setIsLoading] = useState(true);
     const [absents, setAbsents] = useState([]);
@@ -36,21 +34,14 @@ const App = ({navigation}) => {
         })
     }
 
-    useLayoutEffect(() => {
-        navigation.setOptions({
-            headerRight: () => <ReloadButton onPress={fetchData} />
-        })
-    })
-
     useEffect(() => {
         fetchData();
     }, [])
-    let screen = <View style={Styles.container}><ActivityIndicator size={'large'}/></View>;
-    if (!isLoading) {
-        screen = <View style={[Styles.innerApp, {backgroundColor: '#fff'}]}>
+    return (
+        <Refreshable isLoading={isLoading} refreshFunction={fetchData}>
             <View style={styles.calendarWrap}><Calendar
                 onDayPress={day => {
-                    setSelected(day.dateString);
+                    // setSelected(day.dateString);
                 }}
                 markedDates={markedDates}
             /></View>
@@ -64,12 +55,7 @@ const App = ({navigation}) => {
                 <View style={[styles.gridItem, styles.percentage]}><Text
                     style={styles.text}>Percentage: {Math.round(((presence.length) * 100) / (absents.length + presence.length), 2)}%</Text></View>
             </View>
-        </View>
-    }
-    return (
-        <>
-            {screen}
-        </>
+        </Refreshable>
     );
 };
 const styles = StyleSheet.create({

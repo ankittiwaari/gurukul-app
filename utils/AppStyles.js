@@ -41,13 +41,13 @@ export default StyleSheet.create({
     fontSize: 30,
     fontWeight: "bold",
     marginBottom: 30,
-    color: '#283618'
+    color: '#bc6c25'
   },
   buttonWrap: {
     overflow: "hidden",
     borderRadius: 50,
   },
   globalText: {
-    color: "#2E2E2E",
+    color: "#283618",
   },
 });

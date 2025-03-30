@@ -7,8 +7,8 @@ export default menuItems = [
     {id:"c6", title:"Fee", icon:"rupee", navigationTarget:"Fee"},
     {id:"c7", title:"Communication", icon:"envelope-o", navigationTarget:"Communication"},
     {id:"c8", title:"Class broadcast", icon:"microphone", navigationTarget:"ClassBroadcast"},
-    {id:"c9", title:"Homework", icon:"files-o", navigationTarget:"Homework"},
-    {id:"c10", title:"Pay online", icon:"internet-explorer", navigationTarget:"PayOnline"},
+    {id:"c9", title:"Homework", icon:"book", navigationTarget:"Homework"},
+    {id:"c10", title:"Pay online", icon:"credit-card", navigationTarget:"PayOnline"},
     {id:"c11", title:"Apply leave", icon:"envelope-o", navigationTarget:"ApplyLeave"},
     {id:"c12", title:"Notifications", icon:"bell-o", navigationTarget:"Notifications"}
 ]

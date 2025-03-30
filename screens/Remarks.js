@@ -8,7 +8,7 @@ import NotificationCard from "../components/NotificationCard";
 export default function () {
     const [isLoading, setIsLoading] = useState(true);
     const [notifications, setNotifications] = useState([]);
-    useEffect(() => {
+    function fetchData(){
         Api.get('remarks').then((data) => {
             const keyList = Object.keys(data);
             const notificationList = keyList.map((key) => ({
@@ -19,13 +19,20 @@ export default function () {
             setNotifications(notificationList);
             setIsLoading(false);
         })
-    },[]);
+    }
+    useEffect(() => {
+        fetchData()
+    }, []);
 
     return (<>
         <ProfileHeader/>
         <View style={Styles.innerApp}>
-            {isLoading && <ActivityIndicator/>}
-            {isLoading || <FlatList data={notifications} renderItem={(props) => <NotificationCard {...props} />} />}
+            <FlatList
+                data={notifications}
+                renderItem={(props) => <NotificationCard {...props} />}
+                refreshing={isLoading}
+                onRefresh={fetchData}
+            />
         </View>
     </>)
 }
