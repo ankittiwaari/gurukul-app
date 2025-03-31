@@ -1,9 +1,9 @@
 import {StyleSheet, Text, View, Pressable} from "react-native";
 import {colors} from '../utils/AppStyles';
 
-export default function NotificationCard({item, onPress = () =>{}}) {
+export default function NotificationCard({navTitle, item, onPress = () =>{}}) {
     return (
-        <Pressable android_ripple={{color: colors.extra1}} onPress={() => onPress('CommonDetails', {...item})}>
+        <Pressable android_ripple={{color: colors.extra1}} onPress={() => onPress('CommonDetails', {...item, navTitle})}>
             <View style={textStyles.contentWrap}>
                 <View style={textStyles.notificationWrap}>
                     <View style={{

@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 import LabelledText from '../components/LabelledText';
 import Styles, {colors} from '../utils/AppStyles';
 import axios from 'axios';
+import Refreshable from "../components/Refreshable";
 
 export default function () {
     const [userData, setUserData] = useState({
@@ -11,22 +12,23 @@ export default function () {
     const [isLoading, setIsLoading] = useState(true);
     const [dataFetched, setDataFetched] = useState(false);
 
+    async function fetchData() {
+        try {
+            const profileData = await axios.get(`${process.env.EXPO_PUBLIC_API_URL}/students.json`);
+            setUserData(profileData.data[Object.keys(profileData.data)[0]]);
+            setIsLoading(false);
+            setDataFetched(true);
+        } catch (err) {
+            Alert.alert("Error fetching Profile data");
+        }
+    }
+
     useEffect(() => {
         if (dataFetched) {
             return;
         }
-        async function fetchData() {
-            try {
-                const profileData = await axios.get(`${process.env.EXPO_PUBLIC_API_URL}/students.json`);
-                setUserData(profileData.data[Object.keys(profileData.data)[0]]);
-                setIsLoading(false);
-                setDataFetched(true);
-            } catch (err) {
-                Alert.alert("Error fetching Profile data");
-            }
-        }
         fetchData();
-    }, [userData])
+    }, [])
 
     const profileScreen = (<View style={[Styles.innerApp, profileStyles.cardWrap]}>
         <View style={{marginBottom: 120}}>
@@ -61,8 +63,11 @@ export default function () {
     </View>)
 
     return (<>
-        {isLoading && <View style={Styles.container}><ActivityIndicator size="large"/></View>}
-        {!isLoading && profileScreen}
+        <Refreshable
+            refreshFunction={fetchData}
+            isLoading={isLoading}>
+            {profileScreen}
+        </Refreshable>
     </>)
 }
 

@@ -5,10 +5,11 @@ import {useEffect, useState} from "react";
 import Api from '../utils/Api';
 import NotificationCard from "../components/NotificationCard";
 
-export default function () {
+export default function ({navigation}) {
     const [isLoading, setIsLoading] = useState(true);
     const [notifications, setNotifications] = useState([]);
-    function fetchData(){
+
+    function fetchData() {
         Api.get('remarks').then((data) => {
             const keyList = Object.keys(data);
             const notificationList = keyList.map((key) => ({
@@ -20,6 +21,7 @@ export default function () {
             setIsLoading(false);
         })
     }
+
     useEffect(() => {
         fetchData()
     }, []);
@@ -29,7 +31,7 @@ export default function () {
         <View style={Styles.innerApp}>
             <FlatList
                 data={notifications}
-                renderItem={(props) => <NotificationCard {...props} />}
+                renderItem={(props) => <NotificationCard {...props} onPress={navigation.push} navTitle={"Remark details"}/>}
                 refreshing={isLoading}
                 onRefresh={fetchData}
             />

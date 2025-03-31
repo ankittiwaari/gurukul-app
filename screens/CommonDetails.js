@@ -1,11 +1,14 @@
-import {View, Text, ScrollView, RefreshControl} from 'react-native'
+import {View, Text, ScrollView} from 'react-native'
 import ProfileHeader from '../components/ProfileHeader';
 import Styles from '../utils/AppStyles';
 import {SafeAreaProvider, SafeAreaView} from "react-native-safe-area-context";
 import React from "react";
 import {StyleSheet} from 'react-native';
 
-export default function ({route}) {
+export default function ({route, navigation}) {
+    React.useLayoutEffect(() => {
+        navigation.setOptions({headerTitle: route.params.navTitle || "Details"});
+    })
     return (<SafeAreaProvider>
             <ProfileHeader/>
             <SafeAreaView style={[Styles.innerApp]}>
@@ -25,6 +28,6 @@ const styles = StyleSheet.create({
         padding: 10
     },
     textNormal: {
-        fontSize: 25,
+        fontSize: 18,
     }
 })

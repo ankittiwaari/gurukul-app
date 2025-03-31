@@ -31,7 +31,7 @@ export default function ({navigation}) {
         <View style={Styles.innerApp}>
             {<FlatList
                 data={notifications}
-                renderItem={(props) => <NotificationCard {...props} onPress={navigation.push}/>}
+                renderItem={(props) => <NotificationCard {...props} onPress={navigation.push} navTitle={"Notification details"}/>}
                 onRefresh={fetchData}
                 refreshing={isLoading}
             />}
